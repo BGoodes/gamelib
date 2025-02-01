@@ -23,7 +23,7 @@ public abstract class GameLib extends JavaPlugin {
         // Services registration
         this.servicesManager.register(StateService.class, new StateService());
 
-        this.getLogger().info("==================================");
+        this.onStart();
     }
 
     @Override
@@ -33,7 +33,6 @@ public abstract class GameLib extends JavaPlugin {
         this.servicesManager.unregister(this.getClass());
 
         this.onStop();
-        this.getLogger().info("================================");
     }
 
     public abstract void onStart();
@@ -46,6 +45,16 @@ public abstract class GameLib extends JavaPlugin {
             throw new IllegalStateException("Tried to access to the GameLib whereas the plugin was disabled.");
 
         return gameLib;
+    }
+
+    @NotNull
+    public GameServicesManager getGameServicesManager() {
+        return this.servicesManager;
+    }
+
+    @NotNull
+    public StateService getStateService() {
+        return this.getService(StateService.class);
     }
 
     @NotNull
