@@ -6,7 +6,7 @@ plugins {
 
 allprojects {
     group = "fr.bgoodes"
-    version = "1.0.0-SNAPSHOT"
+    version = "0.1.0-SNAPSHOT"
 
     apply(plugin = "com.github.johnrengelman.shadow")
     apply(plugin = "java-library")
@@ -27,7 +27,7 @@ allprojects {
     }
 
     dependencies {
-        compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
+        compileOnly("io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT")
         compileOnly("org.jetbrains:annotations:24.1.0")
     }
 
