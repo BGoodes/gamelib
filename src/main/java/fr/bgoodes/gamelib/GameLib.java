@@ -1,6 +1,8 @@
 package fr.bgoodes.gamelib;
 
 import fr.bgoodes.gamelib.services.GameServicesManager;
+import fr.bgoodes.gamelib.services.player.AbstractPlayerService;
+import fr.bgoodes.gamelib.services.player.GamePlayer;
 import fr.bgoodes.gamelib.services.state.StateService;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.IllegalPluginAccessException;
@@ -8,12 +10,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class GameLib extends JavaPlugin {
+public abstract class GameLib<GP extends GamePlayer> extends JavaPlugin {
 
     private final @NotNull GameServicesManager servicesManager;
 
-    public GameLib() {
+    public GameLib(final @NotNull AbstractPlayerService<GP> playerService) {
         this.servicesManager = new GameServicesManager(this);
+
+        this.servicesManager.register(AbstractPlayerService.class, playerService);
+
     }
 
     @Override
@@ -39,8 +44,8 @@ public abstract class GameLib extends JavaPlugin {
     public abstract void onStop();
 
     @NotNull
-    public static GameLib get() {
-        final @Nullable GameLib gameLib = Bukkit.getServicesManager().load(GameLib.class);
+    public static GameLib<?> get() {
+        final @Nullable GameLib<?> gameLib = Bukkit.getServicesManager().load(GameLib.class);
         if(gameLib == null)
             throw new IllegalStateException("Tried to access to the GameLib whereas the plugin was disabled.");
 

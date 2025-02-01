@@ -2,10 +2,16 @@ package fr.bgoodes.uhc;
 
 import fr.bgoodes.gamelib.GameLib;
 import fr.bgoodes.gamelib.services.state.StateService;
+import fr.bgoodes.uhc.player.UHCPlayer;
+import fr.bgoodes.uhc.player.UHCPlayerService;
 import fr.bgoodes.uhc.state.PlayingState;
 import fr.bgoodes.uhc.state.StartingState;
 
-public class UHC extends GameLib {
+public class UHC extends GameLib<UHCPlayer> {
+
+    public UHC() {
+        super(new UHCPlayerService());
+    }
 
     @Override
     public void onStart() {
