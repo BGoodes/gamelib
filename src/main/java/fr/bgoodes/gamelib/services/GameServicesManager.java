@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GameServicesManager {
+public class GameServicesManager extends GameService {
 
     @NotNull
     private final Set<GameService> registeredServices;
@@ -18,10 +18,8 @@ public class GameServicesManager {
     public GameServicesManager(GameLib gameLib) {
         this.registeredServices = new HashSet<>();
         this.gameLib = gameLib;
-        this.servicesManager = gameLib.getServer().getServicesManager();
-    }
 
-    public void onLoad() {
+        this.servicesManager = gameLib.getServer().getServicesManager();
         this.servicesManager.register(GameLib.class, this.gameLib, this.gameLib, org.bukkit.plugin.ServicePriority.Normal);
     }
 
