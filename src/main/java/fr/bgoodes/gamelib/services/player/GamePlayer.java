@@ -11,9 +11,11 @@ public class GamePlayer {
 
     @NotNull
     private final UUID uniqueId;
+    private boolean spectator;
 
-    public GamePlayer(final @NotNull UUID uuid) {
+    public GamePlayer(final @NotNull UUID uuid, final boolean spectator) {
         this.uniqueId = uuid;
+        this.spectator = spectator;
     }
 
     @NotNull
@@ -29,6 +31,14 @@ public class GamePlayer {
     public boolean isOnline() {
         final @Nullable Player bukkitPlayer = this.getBukkitPlayer();
         return bukkitPlayer != null && bukkitPlayer.isOnline() && bukkitPlayer.isValid();
+    }
+
+    public boolean isSpectator() {
+        return this.spectator;
+    }
+
+    public void setSpectator(final boolean spectator) {
+        this.spectator = spectator;
     }
 
     @Override

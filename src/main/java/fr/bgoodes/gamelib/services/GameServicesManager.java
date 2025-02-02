@@ -12,10 +12,10 @@ public class GameServicesManager extends GameService {
     @NotNull
     private final Set<GameService> registeredServices;
 
-    private final GameLib gameLib;
+    private final GameLib<?> gameLib;
     private final ServicesManager servicesManager;
 
-    public GameServicesManager(GameLib gameLib) {
+    public GameServicesManager(final GameLib<?> gameLib) {
         this.registeredServices = new HashSet<>();
         this.gameLib = gameLib;
 

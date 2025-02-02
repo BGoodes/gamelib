@@ -8,6 +8,6 @@ import java.util.UUID;
 public class UHCPlayer extends GamePlayer {
 
     public UHCPlayer(@NotNull UUID uniqueId) {
-        super(uniqueId);
+        super(uniqueId, false);
     }
 }
