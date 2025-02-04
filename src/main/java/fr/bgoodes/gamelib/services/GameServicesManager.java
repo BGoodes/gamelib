@@ -42,4 +42,9 @@ public class GameServicesManager extends GameService {
 
         this.servicesManager.unregister(clazz);
     }
+
+    public void unregisterAll() {
+        this.registeredServices.forEach(s -> this.servicesManager.unregister(s.getClass()));
+        this.registeredServices.clear();
+    }
 }
