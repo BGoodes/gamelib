@@ -75,6 +75,11 @@ public abstract class GameLib<GP extends GamePlayer> extends JavaPlugin {
     }
 
     @NotNull
+    public TextService getTextService() {
+        return this.getService(TextService.class);
+    }
+
+    @NotNull
     public final <T> T getService(final @NotNull Class<T> clazz) {
         final @Nullable T service = this.getServer().getServicesManager().load(clazz);
         if(service == null)
