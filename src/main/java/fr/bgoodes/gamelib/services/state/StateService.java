@@ -17,7 +17,7 @@ public class StateService extends GameService {
     private AbstractGameState currentState;
 
     @NotNull
-    private final Map<String, AbstractGameState> registeredStates = new HashMap<>();
+    private final Map<String, AbstractGameState> statesMap = new HashMap<>();
 
     @Override
     public void onLoad() {
@@ -33,15 +33,15 @@ public class StateService extends GameService {
     }
 
     public void registerGameState(final @NotNull String id, final @NotNull AbstractGameState gameState) {
-        this.registeredStates.put(id, gameState);
+        this.statesMap.put(id, gameState);
     }
 
     public void unregisterGameState(final @NotNull String id) {
-        this.registeredStates.remove(id);
+        this.statesMap.remove(id);
     }
 
     public void changeGameState(final @NotNull String stateId) {
-        final @Nullable AbstractGameState newState = this.registeredStates.get(stateId);
+        final @Nullable AbstractGameState newState = this.statesMap.get(stateId);
 
         if (newState == null)
             throw new IllegalGameState(stateId);

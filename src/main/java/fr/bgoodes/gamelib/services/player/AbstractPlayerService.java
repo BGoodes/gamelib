@@ -12,31 +12,31 @@ import java.util.UUID;
 public abstract class AbstractPlayerService<GP extends GamePlayer> extends GameService {
 
     @NotNull
-    private final Map<UUID, GP> players = new HashMap<>();
+    private final Map<UUID, GP> playersMap = new HashMap<>();
 
     public abstract @NotNull GP createPlayer(final @NotNull UUID uniqueId);
 
     public @NotNull GP getOrCreatePlayer(final @NotNull UUID uniqueId) {
-        return this.players.computeIfAbsent(uniqueId, this::createPlayer);
+        return this.playersMap.computeIfAbsent(uniqueId, this::createPlayer);
     }
 
     @Nullable
     public GP getGamePlayer(final @NotNull UUID uniqueId) {
-        return this.players.get(uniqueId);
+        return this.playersMap.get(uniqueId);
     }
 
     public void removePlayer(final @NotNull UUID uniqueId) {
-        this.players.remove(uniqueId);
+        this.playersMap.remove(uniqueId);
     }
 
     @NotNull
     public Collection<GP> getPlayers() {
-        return this.players.values();
+        return this.playersMap.values();
     }
 
     @NotNull
     public Collection<GP> getOnlinePlayers() {
-        return this.players.values().stream()
+        return this.playersMap.values().stream()
                 .filter(GamePlayer::isOnline)
                 .toList();
     }
