@@ -55,8 +55,7 @@ public abstract class GameLib<GP extends GamePlayer> extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(listener, this);
     }
 
-    @NotNull
-    public static GameLib<?> get() {
+    public static @NotNull GameLib<?> get() {
         final @Nullable GameLib<?> gameLib = Bukkit.getServicesManager().load(GameLib.class);
         if(gameLib == null)
             throw new IllegalStateException("Tried to access to the GameLib whereas the plugin was disabled.");
@@ -64,23 +63,19 @@ public abstract class GameLib<GP extends GamePlayer> extends JavaPlugin {
         return gameLib;
     }
 
-    @NotNull
-    public GameServicesManager getGameServicesManager() {
+    public @NotNull GameServicesManager getGameServicesManager() {
         return this.servicesManager;
     }
 
-    @NotNull
-    public StateService getStateService() {
+    public @NotNull StateService getStateService() {
         return this.getService(StateService.class);
     }
 
-    @NotNull
-    public TextService getTextService() {
+    public @NotNull TextService getTextService() {
         return this.getService(TextService.class);
     }
 
-    @NotNull
-    public final <T> T getService(final @NotNull Class<T> clazz) {
+    public @NotNull final <T> T getService(final @NotNull Class<T> clazz) {
         final @Nullable T service = this.getServer().getServicesManager().load(clazz);
         if(service == null)
             throw new IllegalPluginAccessException("Tried to access to a GameLib service whereas the plugin was disabled!");

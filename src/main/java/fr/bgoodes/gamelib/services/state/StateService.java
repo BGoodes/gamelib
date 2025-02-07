@@ -26,9 +26,8 @@ public class StateService extends GameService {
 
         this.changeGameState(LobbyState.STATE_ID);
     }
-
-    @Nullable
-    public AbstractGameState getCurrentState() {
+    
+    public @Nullable AbstractGameState getCurrentState() {
         return this.currentState;
     }
 

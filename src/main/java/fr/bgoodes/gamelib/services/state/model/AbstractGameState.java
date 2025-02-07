@@ -21,7 +21,7 @@ public abstract class AbstractGameState {
     public final void start() {
         this.onStart();
 
-        final @NotNull GameLib gameLib = GameLib.get();
+        final @NotNull GameLib<?> gameLib = GameLib.get();
 
         for(final @NotNull Listener listener : this.listeners)
             gameLib.getServer().getPluginManager().registerEvents(listener, gameLib);

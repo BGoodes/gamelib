@@ -18,8 +18,7 @@ public class GamePlayer {
         this.spectator = spectator;
     }
 
-    @NotNull
-    public UUID getUUID() {
+    public @NotNull UUID getUUID() {
         return this.uniqueId;
     }
 

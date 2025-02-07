@@ -12,7 +12,10 @@ public class GameServicesManager extends GameService {
     @NotNull
     private final Set<GameService> registeredServices;
 
+    @NotNull
     private final GameLib<?> gameLib;
+
+    @NotNull
     private final ServicesManager servicesManager;
 
     public GameServicesManager(final GameLib<?> gameLib) {

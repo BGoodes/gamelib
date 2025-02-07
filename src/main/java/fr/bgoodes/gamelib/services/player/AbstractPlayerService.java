@@ -20,8 +20,7 @@ public abstract class AbstractPlayerService<GP extends GamePlayer> extends GameS
         return this.playersMap.computeIfAbsent(uniqueId, this::createPlayer);
     }
 
-    @Nullable
-    public GP getGamePlayer(final @NotNull UUID uniqueId) {
+    public @Nullable GP getGamePlayer(final @NotNull UUID uniqueId) {
         return this.playersMap.get(uniqueId);
     }
 
@@ -29,13 +28,11 @@ public abstract class AbstractPlayerService<GP extends GamePlayer> extends GameS
         this.playersMap.remove(uniqueId);
     }
 
-    @NotNull
-    public Collection<GP> getPlayers() {
+    public @NotNull Collection<GP> getPlayers() {
         return this.playersMap.values();
     }
 
-    @NotNull
-    public Collection<GP> getOnlinePlayers() {
+    public @NotNull Collection<GP> getOnlinePlayers() {
         return this.playersMap.values().stream()
                 .filter(GamePlayer::isOnline)
                 .toList();

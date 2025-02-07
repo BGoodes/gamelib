@@ -20,13 +20,15 @@ import java.util.ResourceBundle;
 
 public class TextService extends GameService {
 
-    private TranslationRegistry registry;
+    @NotNull
+    private final TranslationRegistry registry = TranslationRegistry.create(Key.key("gamelib:general"));
 
+    @NotNull
     private final MiniMessage MINI_MESSAGE = MiniMessage.builder().build();
+
 
     @Override
     public void onLoad() {
-        this.registry = TranslationRegistry.create(Key.key("gamelib:general"));
 
         // TEMP -----
         ResourceBundle bundle = ResourceBundle.getBundle("Bundle", Locale.US, UTF8ResourceBundleControl.get());
@@ -40,48 +42,48 @@ public class TextService extends GameService {
         GlobalTranslator.translator().addSource(registry);
     }
 
-    public TranslationRegistry getRegistry() {
+    public @NotNull TranslationRegistry getRegistry() {
         return registry;
     }
 
-    public void setDefaultLocale(Locale locale) {
+    public void setDefaultLocale(final @NotNull Locale locale) {
         registry.defaultLocale(locale);
     }
 
-    public void addTranslation(String key, Locale locale, MessageFormat messageFormat) {
+    public void addTranslation(final @NotNull String key, final @NotNull Locale locale, final @NotNull MessageFormat messageFormat) {
         registry.register(key, locale, messageFormat);
     }
 
-    public void addTranslations(Map<String, MessageFormat> translations, Locale locale) {
+    public void addTranslations(final @NotNull Map<String, MessageFormat> translations, final @NotNull Locale locale) {
         registry.registerAll(locale, translations);
     }
 
-    public void addTranslations(ResourceBundle bundle, Locale locale) {
+    public void addTranslations(final @NotNull ResourceBundle bundle, final @NotNull Locale locale) {
         registry.registerAll(locale, bundle, true);
     }
 
-    public void removeTranslation(String key) {
+    public void removeTranslation(final @NotNull String key) {
         registry.unregister(key);
     }
 
-    public @Nullable MessageFormat getMessageFormat(String key, Locale locale) {
+    public @Nullable MessageFormat getMessageFormat(final @NotNull String key, final @NotNull Locale locale) {
         return registry.translate(key, locale);
     }
 
-    public @NotNull Component tr(String key, Locale locale) {
+    public @NotNull Component tr(final @NotNull String key, final @NotNull Locale locale) {
         final @Nullable MessageFormat message = registry.translate(key, locale);
         return message != null ? MINI_MESSAGE.deserialize(message.toPattern()) :
                 Component.text(key, Style.style(TextDecoration.UNDERLINED));
     }
 
-    public @NotNull Component tr(String key, Locale locale, TagResolver tagResolver) {
+    public @NotNull Component tr(final @NotNull String key, final @NotNull Locale locale, final @NotNull TagResolver tagResolver) {
         final @Nullable MessageFormat message = registry.translate(key, locale);
         return message != null ? MINI_MESSAGE.deserialize(message.toPattern(), tagResolver) :
                 Component.text(key, Style.style(TextDecoration.UNDERLINED))
                         .append(Component.text(" (1 tag)", Style.empty()));
     }
 
-    public @NotNull Component tr(String key, Locale locale, TagResolver... tagResolvers) {
+    public @NotNull Component tr(final @NotNull String key, final @NotNull Locale locale, final @NotNull TagResolver... tagResolvers) {
         final @Nullable MessageFormat message = registry.translate(key, locale);
         return message != null ? MINI_MESSAGE.deserialize(message.toPattern(), tagResolvers) :
                 Component.text(key, Style.style(TextDecoration.UNDERLINED))
