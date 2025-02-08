@@ -1,7 +1,11 @@
 package fr.bgoodes.gamelib;
 
+import fr.bgoodes.gamelib.config.ITestConfig;
+import fr.bgoodes.gamelib.exceptions.InvalidConfigException;
 import fr.bgoodes.gamelib.listeners.GlobalChatListener;
 import fr.bgoodes.gamelib.services.GameServicesManager;
+import fr.bgoodes.gamelib.services.config.ConfigService;
+import fr.bgoodes.gamelib.services.config.IGameConfig;
 import fr.bgoodes.gamelib.services.player.AbstractPlayerService;
 import fr.bgoodes.gamelib.services.player.GamePlayer;
 import fr.bgoodes.gamelib.services.state.StateService;
@@ -29,6 +33,7 @@ public abstract class GameLib<GP extends GamePlayer> extends JavaPlugin {
         this.getLogger().info("===== GameLib initialization =====");
 
         // Services registration
+        this.servicesManager.register(ConfigService.class, new ConfigService());
         this.servicesManager.register(TextService.class, new TextService());
         this.servicesManager.register(StateService.class, new StateService());
 
@@ -73,6 +78,10 @@ public abstract class GameLib<GP extends GamePlayer> extends JavaPlugin {
 
     public @NotNull TextService getTextService() {
         return this.getService(TextService.class);
+    }
+
+    public @NotNull ConfigService getConfigService() {
+        return this.getService(ConfigService.class);
     }
 
     public @NotNull final <T> T getService(final @NotNull Class<T> clazz) {
