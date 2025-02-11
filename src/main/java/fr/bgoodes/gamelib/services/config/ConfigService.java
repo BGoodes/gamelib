@@ -13,7 +13,8 @@ public class ConfigService extends GameService {
     @NotNull
     private final Map<Class<?>, IGameConfig> configsMap = new HashMap<>();
 
-    public @NotNull <T extends IGameConfig> T getConfig(final @NotNull Class<T> configClass) throws InvalidConfigException {
+    @SuppressWarnings("unchecked")
+    public @NotNull <T extends IGameConfig> T getConfig(final @NotNull Class<T> configClass) {
         if (!configsMap.containsKey(configClass)) {
             try {
                 configsMap.put(configClass, new ConfigFactory<>(configClass).createInstance());
