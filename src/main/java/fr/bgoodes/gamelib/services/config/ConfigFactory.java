@@ -3,6 +3,7 @@ package fr.bgoodes.gamelib.services.config;
 import fr.bgoodes.gamelib.exceptions.DeserializationException;
 import fr.bgoodes.gamelib.exceptions.MissingOptionMethodsException;
 import fr.bgoodes.gamelib.services.config.options.Option;
+import fr.bgoodes.gamelib.services.config.options.OptionFactory;
 import fr.bgoodes.gamelib.services.config.options.impl.StringOption;
 import fr.bgoodes.gamelib.services.config.options.model.AbstractOption;
 import org.jetbrains.annotations.NotNull;
@@ -101,7 +102,7 @@ public class ConfigFactory<T extends IGameConfig> {
     }
 
     private @NotNull AbstractOption createAndInitializeOption(final @NotNull Method method) {
-        AbstractOption option = new StringOption();
+        AbstractOption option = new OptionFactory(method.getReturnType()).getInstance();
 
         Option annotation = method.getAnnotation(Option.class);
         try {
