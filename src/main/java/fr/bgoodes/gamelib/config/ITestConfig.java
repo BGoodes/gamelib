@@ -13,6 +13,7 @@ public interface ITestConfig extends IGameConfig {
     String getTest2();
     void setTest2(String test2);
 
-    @Option(key = "test3", defaultValue = "Hello World 3!")
-    String getTest3();
+    @Option(key = "test3", defaultValue = "n")
+    boolean getTest3();
+    void setTest3(boolean test3);
 }

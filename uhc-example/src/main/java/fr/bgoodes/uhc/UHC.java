@@ -25,7 +25,7 @@ public class UHC extends GameLib<UHCPlayer> {
         try {
             ITestConfig config = getConfigService().getConfig(ITestConfig.class);
             this.getLogger().info(config.getTest());
-            this.getLogger().info(config.getTest3());
+            this.getLogger().info("test3: %s".formatted(config.getTest3()));
             config.setTest("test2");
             this.getLogger().info(config.getTest());
 
