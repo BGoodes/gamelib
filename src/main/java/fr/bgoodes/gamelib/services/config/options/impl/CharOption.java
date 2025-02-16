@@ -1,6 +1,6 @@
 package fr.bgoodes.gamelib.services.config.options.impl;
 
-import fr.bgoodes.gamelib.exceptions.DeserializationException;
+import fr.bgoodes.gamelib.services.config.exception.DeserializationException;
 import fr.bgoodes.gamelib.services.config.options.model.AbstractOption;
 import org.jetbrains.annotations.Nullable;
 

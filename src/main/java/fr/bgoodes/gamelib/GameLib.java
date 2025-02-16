@@ -1,11 +1,8 @@
 package fr.bgoodes.gamelib;
 
-import fr.bgoodes.gamelib.config.ITestConfig;
-import fr.bgoodes.gamelib.exceptions.InvalidConfigException;
 import fr.bgoodes.gamelib.listeners.GlobalChatListener;
 import fr.bgoodes.gamelib.services.GameServicesManager;
 import fr.bgoodes.gamelib.services.config.ConfigService;
-import fr.bgoodes.gamelib.services.config.IGameConfig;
 import fr.bgoodes.gamelib.services.player.AbstractPlayerService;
 import fr.bgoodes.gamelib.services.player.GamePlayer;
 import fr.bgoodes.gamelib.services.state.StateService;

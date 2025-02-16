@@ -1,7 +1,7 @@
 package fr.bgoodes.gamelib.services.config;
 
-import fr.bgoodes.gamelib.exceptions.InvalidConfigException;
-import fr.bgoodes.gamelib.exceptions.MissingOptionMethodsException;
+import fr.bgoodes.gamelib.services.config.exception.InvalidConfigException;
+import fr.bgoodes.gamelib.services.config.exception.MissingOptionMethodsException;
 import fr.bgoodes.gamelib.services.GameService;
 import org.jetbrains.annotations.NotNull;
 

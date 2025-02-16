@@ -1,4 +1,4 @@
-package fr.bgoodes.gamelib.exceptions;
+package fr.bgoodes.gamelib.services.config.exception;
 
 public class DeserializationException extends Exception {
 

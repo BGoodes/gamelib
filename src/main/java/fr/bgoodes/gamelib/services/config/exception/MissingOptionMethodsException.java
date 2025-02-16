@@ -1,4 +1,4 @@
-package fr.bgoodes.gamelib.exceptions;
+package fr.bgoodes.gamelib.services.config.exception;
 
 import fr.bgoodes.gamelib.services.config.IGameConfig;
 import org.jetbrains.annotations.NotNull;
