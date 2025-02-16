@@ -22,17 +22,17 @@ public class BooleanOption extends AbstractOption {
 
     @Override
     public @Nullable Object deserialize(@Nullable String s) throws DeserializationException {
-        if (s != null) {
-            for (String trueString : TRUE_STRINGS) {
-                if (trueString.equalsIgnoreCase(s)) {
-                    return true;
-                }
-            }
+        if (s == null || s.isEmpty()) return null;
 
-            for (String falseString : FALSE_STRINGS) {
-                if (falseString.equalsIgnoreCase(s)) {
-                    return false;
-                }
+        for (String trueString : TRUE_STRINGS) {
+            if (trueString.equalsIgnoreCase(s)) {
+                return true;
+            }
+        }
+
+        for (String falseString : FALSE_STRINGS) {
+            if (falseString.equalsIgnoreCase(s)) {
+                return false;
             }
         }
 

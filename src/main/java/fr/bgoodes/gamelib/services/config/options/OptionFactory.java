@@ -1,10 +1,7 @@
 package fr.bgoodes.gamelib.services.config.options;
 
 import fr.bgoodes.gamelib.GameLib;
-import fr.bgoodes.gamelib.services.config.options.impl.BooleanOption;
-import fr.bgoodes.gamelib.services.config.options.impl.CharOption;
-import fr.bgoodes.gamelib.services.config.options.impl.NumberOption;
-import fr.bgoodes.gamelib.services.config.options.impl.StringOption;
+import fr.bgoodes.gamelib.services.config.options.impl.*;
 import fr.bgoodes.gamelib.services.config.options.model.AbstractOption;
 import org.jetbrains.annotations.NotNull;
 
@@ -13,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+// TODO : refactor this class, this is a mess
 public class OptionFactory {
 
     private @NotNull final Class<?> clazz;
@@ -20,7 +18,6 @@ public class OptionFactory {
     private static @NotNull final Map<Class<?>, Class<? extends AbstractOption>> optionsMap = new HashMap<>();
     private static @NotNull final Map<Class<?>, Function<String, ? extends Number>> numberParsers = new HashMap<>();
 
-    // What a mess!
     public OptionFactory(@NotNull Class<?> clazz) {
         this.clazz = clazz;
     }
@@ -54,9 +51,14 @@ public class OptionFactory {
     }
 
     public @NotNull AbstractOption getInstance() {
+        //enum options
+        if (Enum.class.isAssignableFrom(clazz)) {
+            return new EnumOption<>(clazz.asSubclass(Enum.class));
+        }
+
         // number options
         if (numberParsers.containsKey(clazz)) {
-            return new NumberOption<>(clazz, numberParsers.get(clazz));
+            return new NumberOption<>(clazz.asSubclass(Number.class), numberParsers.get(clazz));
         }
 
         if (!optionsMap.containsKey(clazz)) {
