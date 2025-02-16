@@ -9,10 +9,10 @@ import java.util.function.Function;
 
 public class NumberOption<T extends Number> extends AbstractOption {
 
-    private @NotNull final Class<T> numberType;
+    private @NotNull final Class<?> numberType;
     private @NotNull final Function<String, T> parser;
 
-    public NumberOption(@NotNull Class<T> numberType, @NotNull Function<String, T> parser) {
+    public NumberOption(@NotNull Class<?> numberType, @NotNull Function<String, T> parser) {
         this.numberType = numberType;
         this.parser = parser;
     }

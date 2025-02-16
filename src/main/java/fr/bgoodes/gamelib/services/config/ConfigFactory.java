@@ -4,7 +4,6 @@ import fr.bgoodes.gamelib.exceptions.DeserializationException;
 import fr.bgoodes.gamelib.exceptions.MissingOptionMethodsException;
 import fr.bgoodes.gamelib.services.config.options.Option;
 import fr.bgoodes.gamelib.services.config.options.OptionFactory;
-import fr.bgoodes.gamelib.services.config.options.impl.StringOption;
 import fr.bgoodes.gamelib.services.config.options.model.AbstractOption;
 import org.jetbrains.annotations.NotNull;
 

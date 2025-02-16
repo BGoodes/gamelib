@@ -58,7 +58,7 @@ public class OptionFactory {
 
         // number options
         if (numberParsers.containsKey(clazz)) {
-            return new NumberOption<>(clazz.asSubclass(Number.class), numberParsers.get(clazz));
+            return new NumberOption<>(clazz, numberParsers.get(clazz));
         }
 
         if (!optionsMap.containsKey(clazz)) {

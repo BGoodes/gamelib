@@ -1,8 +1,6 @@
 package fr.bgoodes.uhc;
 
 import fr.bgoodes.gamelib.GameLib;
-import fr.bgoodes.gamelib.config.ITestConfig;
-import fr.bgoodes.gamelib.exceptions.InvalidConfigException;
 import fr.bgoodes.gamelib.services.state.StateService;
 import fr.bgoodes.uhc.player.UHCPlayer;
 import fr.bgoodes.uhc.player.UHCPlayerService;
@@ -21,19 +19,6 @@ public class UHC extends GameLib<UHCPlayer> {
 
         // Register custom states
         final StateService stateService = this.getStateService();
-
-        try {
-            ITestConfig config = getConfigService().getConfig(ITestConfig.class);
-            this.getLogger().info("test: %s".formatted(config.getTest()));
-            this.getLogger().info("test2: %c".formatted(config.getTest2()));
-            this.getLogger().info("test3: %s".formatted(config.getTest3()));
-            config.setTest(42.0);
-            this.getLogger().info("test: %s".formatted(config.getTest()));
-
-        } catch (InvalidConfigException e) {
-            throw new RuntimeException(e);
-        }
-
         stateService.registerGameState(StartingState.STATE_ID, new StartingState());
         stateService.registerGameState(PlayingState.STATE_ID, new PlayingState());
     }
