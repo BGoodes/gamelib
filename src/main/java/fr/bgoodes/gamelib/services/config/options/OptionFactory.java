@@ -2,6 +2,8 @@ package fr.bgoodes.gamelib.services.config.options;
 
 import fr.bgoodes.gamelib.GameLib;
 import fr.bgoodes.gamelib.services.config.options.impl.BooleanOption;
+import fr.bgoodes.gamelib.services.config.options.impl.CharOption;
+import fr.bgoodes.gamelib.services.config.options.impl.NumberOption;
 import fr.bgoodes.gamelib.services.config.options.impl.StringOption;
 import fr.bgoodes.gamelib.services.config.options.model.AbstractOption;
 import org.jetbrains.annotations.NotNull;
@@ -9,23 +11,42 @@ import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class OptionFactory {
 
     private @NotNull final Class<?> clazz;
 
     private static @NotNull final Map<Class<?>, Class<? extends AbstractOption>> optionsMap = new HashMap<>();
+    private static @NotNull final Map<Class<?>, Function<String, ? extends Number>> numberParsers = new HashMap<>();
 
+    // What a mess!
     public OptionFactory(@NotNull Class<?> clazz) {
         this.clazz = clazz;
     }
 
     // default options
     static {
+        // default types
         optionsMap.put(boolean.class, BooleanOption.class);
         optionsMap.put(Boolean.class, BooleanOption.class);
+        optionsMap.put(char.class, CharOption.class);
+        optionsMap.put(Character.class, CharOption.class);
         optionsMap.put(String.class, StringOption.class);
-        GameLib.get().getLogger().info("Options registered");
+
+        // number types
+        numberParsers.put(byte.class, Byte::parseByte);
+        numberParsers.put(Byte.class, Byte::parseByte);
+        numberParsers.put(short.class, Short::parseShort);
+        numberParsers.put(Short.class, Short::parseShort);
+        numberParsers.put(int.class, Integer::parseInt);
+        numberParsers.put(Integer.class, Integer::parseInt);
+        numberParsers.put(long.class, Long::parseLong);
+        numberParsers.put(Long.class, Long::parseLong);
+        numberParsers.put(float.class, Float::parseFloat);
+        numberParsers.put(Float.class, Float::parseFloat);
+        numberParsers.put(double.class, Double::parseDouble);
+        numberParsers.put(Double.class, Double::parseDouble);
     }
 
     public static void registerOption(@NotNull Class<?> clazz, @NotNull Class<? extends AbstractOption> option) {
@@ -33,8 +54,13 @@ public class OptionFactory {
     }
 
     public @NotNull AbstractOption getInstance() {
+        // number options
+        if (numberParsers.containsKey(clazz)) {
+            return new NumberOption<>(clazz, numberParsers.get(clazz));
+        }
+
         if (!optionsMap.containsKey(clazz)) {
-            throw new UnsupportedOperationException("Not implemented yet");
+            throw new UnsupportedOperationException("Not implemented yet: %s".formatted(clazz.getSimpleName()));
         }
 
         /*TODO: better exception handling*/

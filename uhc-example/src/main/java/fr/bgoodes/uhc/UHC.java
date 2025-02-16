@@ -24,10 +24,11 @@ public class UHC extends GameLib<UHCPlayer> {
 
         try {
             ITestConfig config = getConfigService().getConfig(ITestConfig.class);
-            this.getLogger().info(config.getTest());
+            this.getLogger().info("test: %s".formatted(config.getTest()));
+            this.getLogger().info("test2: %c".formatted(config.getTest2()));
             this.getLogger().info("test3: %s".formatted(config.getTest3()));
-            config.setTest("test2");
-            this.getLogger().info(config.getTest());
+            config.setTest(42.0);
+            this.getLogger().info("test: %s".formatted(config.getTest()));
 
         } catch (InvalidConfigException e) {
             throw new RuntimeException(e);
